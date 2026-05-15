@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funny Terminal</title>
+
+<style>
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    font-family:monospace;
+    color:#00ff66;
+}
+
+/* TERMINAL */
+
+#terminal{
+    position:absolute;
+    left:20px;
+    top:20px;
+
+    width:45%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-size:20px;
+    line-height:26px;
+
+    white-space:pre-line;
+
+    text-shadow:
+    0 0 5px #00ff66,
+    0 0 15px #00ff66;
+}
+
+/* ZABAWNA POSTAĆ */
+
+#funny{
+    position:absolute;
+
+    right:10%;
+    bottom:10%;
+
+    font-size:10px;
+    line-height:10px;
+
+    white-space:pre;
+
+    color:#00ff66;
+
+    text-shadow:
+    0 0 10px #00ff66,
+    0 0 20px #00ff66;
+
+    transform:scale(3.2);
+}
+
+/* NAPIS */
+
+.warning{
+    position:absolute;
+
+    top:30px;
+    right:40px;
+
+    color:#ff0066;
+
+    font-size:50px;
+    font-weight:bold;
+
+    text-shadow:
+    0 0 20px #ff0066,
+    0 0 40px #ff0066;
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+
+    0%{opacity:1;}
+    50%{opacity:0.4;}
+    100%{opacity:1;}
+}
+
+/* SHAKE */
+
+.glitch{
+    animation:shake 0.1s infinite;
+}
+
+@keyframes shake{
+
+    0%{transform:translate(0px);}
+    25%{transform:translate(1px,-1px);}
+    50%{transform:translate(-1px,1px);}
+    75%{transform:translate(1px,1px);}
+    100%{transform:translate(0px);}
+}
+
+</style>
+</head>
+
+<body class="glitch">
+
+<div class="warning">
+FUNNY.EXE
+</div>
+
+<div id="terminal"></div>
+
+<div id="funny"></div>
+
+<script>
+
+/* =========================
+   TERMINAL
+========================= */
+
+const terminal =
+document.getElementById("terminal");
+
+const logs = [
+
+"LOADING MEMES...",
+"DOWNLOADING BANANAS...",
+"STEALING COOKIES...",
+"ACTIVATING DANCING MODE...",
+"SEARCHING FOR TACOS...",
+"SUMMONING CHAOS...",
+"OPENING CAT DATABASE...",
+"INSTALLING FUNNY.EXE...",
+"LAUNCHING MEME CANNON...",
+"OVERCLOCKING POTATO...",
+"FEEDING HAMSTER...",
+"SCANNING FOR PIZZA...",
+"ENABLING SILLY MODE...",
+"COLLECTING RUBBER DUCKS..."
+];
+
+function randomNumber(){
+
+return Math.floor(
+Math.random()*999999999);
+}
+
+function addLine(){
+
+const text =
+`[${randomNumber()}]
+${logs[Math.floor(Math.random()*logs.length)]}
+
+`;
+
+terminal.innerHTML += text;
+
+if(terminal.innerHTML.length > 50000){
+
+terminal.innerHTML = "";
+}
+
+terminal.scrollTop =
+terminal.scrollHeight;
+}
+
+setInterval(addLine,60);
+
+/* =========================
+   ZABAWNA ANIMACJA
+========================= */
+
+const frames = [
+
+String.raw`
+        _____
+      /(o o )\\
+     /   V    \\
+    /|  ===  |\\
+      |     |
+   ___/| | |\\___
+      / / \\ \\
+     OOO   OOO
+`,
+
+String.raw`
+        _____
+      /( ^ ^)\\
+     /   V    \\
+    /| \\===/ |\\
+      |     |
+   ___/ / \\ \\___
+      O     O
+     /|     |\\
+`,
+
+String.raw`
+        _____
+      /( > <)\\
+     /   V    \\
+  🖕/|  ===  |\\🖕
+      |  U  |
+   ___\\ | | /___
+       /   \\
+      O     O
+`,
+
+String.raw`
+        _____
+      /( o_o)\\
+     /    V    \\
+    /|  ===  |\\
+      | \\_/ |
+   ___/|   |\\___
+      / \\ / \\
+     OOO   OOO
+`
+];
+
+let frame = 0;
+
+function animate(){
+
+document.getElementById("funny")
+.textContent = frames[frame];
+
+frame++;
+
+if(frame >= frames.length){
+
+frame = 0;
+}
+}
+
+setInterval(animate,220);
+
+animate();
+
+</script>
+
+</body>
+</html>
